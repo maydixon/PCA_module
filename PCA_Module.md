@@ -1,5 +1,5 @@
 # Module: Principal Component Analysis
-Claire Hemingway, Basti Stockmeier, and May Dixon  
+Claire Hemingway, Sebastian Stockmaier, and May Dixon  
 December 1, 2016  
 
 
@@ -20,7 +20,7 @@ Key concepts:
 ## The basics  
 *This module can be found at: https://github.com/maydixon/PCA_module*
    
-**Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships in data without losing variation. PCA's are good tools for : 
+**Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships and structure in data without losing variation. PCA's are non-parametric, and they assume that high variances describe something interesting in the data. PCA's are good tools for : 
 
 * Visualizing multivariate data
 
@@ -45,7 +45,11 @@ How we normally plot our data, with our variables as axes (Fig 1A), and the same
 <img src="img/reg.axis.png" width="420px"/>
 <img src="img/PCA.axis.png" width="420px"/>
 
-Neat animation showing how PC1 is fit, with the data projected onto possible eigenvectors. You can see that the best PC1 minimizes the distance between the points and the vector: 
+* the direction of the principal components (PCs) represent the eigenvectors
+* the length of the PCs represent the eigenvalues
+* the correlation between the original variables and the PCs represent the *loadings*: how much each PC is correlated with the original variable
+
+Here is a neat animation showing how PC1 is fit, with the data projected onto possible eigenvectors. You can see that the best PC1 minimizes the distance between the points and the vector: 
 
  <img src="img/Q7HIP.gif" width="420px"/>
  
@@ -69,7 +73,7 @@ Or, you can measure a bunch of different ecological traits in closely related sp
 <img src="img/PCA_overlapping_ecospace.png" width="420px"/>
 <img src="img/PCA_seperate_eco_space.png" width="420px"/>   
    
-> In: Courvreur T. P., Porter-Morgan H., Wieringa J. J., and Chatrou, L. W. Little ecological divergence associated with speciation in two African rain forest tree genera. BMC *Evolutionary Biology*. 2011, 11(296). 
+> In: Courvreur T. P., Porter-Morgan H., Wieringa J. J., and Chatrou, L. W. Little ecological divergence associated with speciation in two African rain forest tree genera. *BMC Evolutionary Biology*. 2011, 11(296). 
 
   
 
