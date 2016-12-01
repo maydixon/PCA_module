@@ -2,7 +2,9 @@
 title: "Module: Principal Component Analysis"
 author: "Claire Hemingway, Basti Stockmeier, and May Dixon"
 date: "December 1, 2016"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -421,7 +423,7 @@ biplot(PC.hep.cov)
 ```
 
 
-Loadings are the correlations between the original variales and the axis. They indicate the direction and magnitude of the icnrease in that variable.The higher the component loading, the more important that variable is to the component. 
+Loadings are the correlations between the original varibales and the axis. They indicate the direction and magnitude of the icnrease in that variable.The higher the component loading, the more important that variable is to the component. 
 ```{r, echo=TRUE}
 #here is the same example wtih princomp
 pc.hep.cor<-princomp(hep, scores=TRUE, cor=TRUE)
