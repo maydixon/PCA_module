@@ -50,7 +50,8 @@ PCA can be thought of as creating natural axes that fit the data and describe it
 **[Drawing a toy version on the board]**
 
 How we normally plot data:
-   
+ <img src="img/Q7HIP.gif" width="420px"/>
+ 
 * 2 or more variables, each forming an axis
 
 We have 2 or more variables- and each variable is an axis
@@ -65,13 +66,17 @@ Can measure a bunch of different ecological traits in closely related species, a
 <img src="img/PCA_overlapping_ecospace.png" width="420px"/>
 <img src="img/PCA_seperate_eco_space.png" width="420px"/>   
    
+> In: Courvreur T. P., Porter-Morgan H., Wieringa J. J., and Chatrou, L. W. Little ecological divergence associated with speciation in two African rain forest tree genera. BMC *Evolutionary Biology*. 2011, 11(296). 
 
 Or, you could predict the route that a species will evolve towards an adaptive peak, based on the existing variation in the population:   
 
 
-<img src="img/adaptive_peak.png" width="750px"/>
-      
-     
+<img src="img/adaptive_peak.png" width="420px"/>
+<img src="img/Gmax_dolf.png" width="420px"/>     
+
+> In: Schluter, D. Adaptive radiation along genetic lines of least resistance. *Evolution*. 1996, 50(5).   
+
+   
 So, now that we've worked thorugh a toy model, let's get into the math:
 
 ### Some Background Mathematics...
@@ -354,8 +359,11 @@ Now this was quite a hustle, and included a lot of steps. Luckily R has build-in
 
 
 
-
-
-    Image credits: 
-    Kirkpatrick, Mike. Population Genetics Lecture QT#2
+      Helpful resources:
+      3D visualization tool:
+      http://setosa.io/ev/principal-component-analysis/
+      Image credits: 
+      http://www.sthda.com/english/wiki/principal-component-analysis-the-basics-you-should-read-r-software-and-data-mining
+      Kirkpatrick, Mike. Population Genetics Lecture QT#2
+    
     
