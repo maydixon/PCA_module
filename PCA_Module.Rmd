@@ -1,11 +1,12 @@
 ---
-title: "PCA Module"
+title: "Module: Principal Component Analysis"
 author: "Claire Hemingway, Basti Stockmeier, and May Dixon"
-date: "November 30, 2016"
+date: "December 1, 2016"
 output: html_document
 ---
 
-```knitr::opts_chunk$set(
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
 	echo = FALSE,
 	warning = FALSE,
 	comment = "##",
@@ -15,23 +16,46 @@ output: html_document
 	fig.path = "img/"
 )
 ```
+      
+ #insert images
+#choose and explain examples (bat blob one)
+#second example?? (look at loading)
+#cut images and inset them in file
+#explain loading and eigens and whatnot, maybe put in a picture. 
+#figure out where to put in virtural drawing
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+**Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships between data without losing variation. PCA's are good tools for : 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* Visualizing multi-variate data
 
-```{r cars}
-summary(cars)
-```
+* Finding the correlations between variables multivariate data
 
-## Including Plots
+* Demonstrating the most important sources of variance in your data
 
-You can also embed plots, for example:
+* Reducing highly dimensional data into fewer, more managable/ visualizable levels
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+* Often an intermediate step used to reveal associations between variables
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+##### What are PCAs used for? 
+For example: 
+Can measure morphology of a bunch of different traits in animals you think are different species, and see whether they can be used to distinguish between the species
+
+
+Or, you could predict the route that a species will evolve towards an adaptive peak, based on the existing variation in the population
+
+
+
+Can be thought of as creating natural axis that fit the data and describe it
+So normally, we visually represent data something like this
+
+We have 2 or more variables- and each variable is an axis
+Each bullet point is a sample and its combination of the variables. 
+
+PCA does, is it creates more informative axis through the data by finding the “principle components”—or the vectors through the data that describe the MOST variation, like least squares, except with more dimensions, potentially. This is easier to describe in 2 dimensions
+There are as many principle components as variables.
+
+
+
+
