@@ -35,7 +35,7 @@ Key concepts:
 ## The basics  
 *This module can be found at: https://github.com/maydixon/PCA_module*
    
-**Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships in data without losing variation. PCA's are good tools for : 
+**Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships and structure in data without losing variation. PCA's are non-parametric, and they assume that high variances describe something interesting in the data. PCA's are good tools for : 
 
 * Visualizing multivariate data
 
@@ -60,7 +60,11 @@ How we normally plot our data, with our variables as axes (Fig 1A), and the same
 <img src="img/reg.axis.png" width="420px"/>
 <img src="img/PCA.axis.png" width="420px"/>
 
-Neat animation showing how PC1 is fit, with the data projected onto possible eigenvectors. You can see that the best PC1 minimizes the distance between the points and the vector: 
+* the direction of the principal components (PCs) represent the eigenvectors
+* the length of the PCs represent the eigenvalues
+* the correlation between the original variables and the PCs represent the *loadings*: how much each PC is correlated with the original variable
+
+Here is a neat animation showing how PC1 is fit, with the data projected onto possible eigenvectors. You can see that the best PC1 minimizes the distance between the points and the vector: 
 
  <img src="img/Q7HIP.gif" width="420px"/>
  
