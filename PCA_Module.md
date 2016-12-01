@@ -55,20 +55,23 @@ This can extend to many dimensions.
 
 
 ##Real world uses:
-Can measure a bunch of different ecological traits in closely related species, and see whether any can be reliably used to distinguish between the species:  
+You could predict the route that a species will evolve towards an adaptive peak, based on the existing variation in the population:   
+
+
+<img src="img/adaptive_peak.png" width="420px"/>
+<img src="img/Gmax_dolf.png" width="420px"/>     
+
+> In: Schluter, D. Adaptive radiation along genetic lines of least resistance. *Evolution*. 1996, 50(5). 
+
+
+Or, you can measure a bunch of different ecological traits in closely related species, and see whether any can be reliably used to distinguish between the species:  
 
 <img src="img/PCA_overlapping_ecospace.png" width="420px"/>
 <img src="img/PCA_seperate_eco_space.png" width="420px"/>   
    
 > In: Courvreur T. P., Porter-Morgan H., Wieringa J. J., and Chatrou, L. W. Little ecological divergence associated with speciation in two African rain forest tree genera. BMC *Evolutionary Biology*. 2011, 11(296). 
 
-Or, you could predict the route that a species will evolve towards an adaptive peak, based on the existing variation in the population:   
-
-
-<img src="img/adaptive_peak.png" width="420px"/>
-<img src="img/Gmax_dolf.png" width="420px"/>     
-
-> In: Schluter, D. Adaptive radiation along genetic lines of least resistance. *Evolution*. 1996, 50(5).   
+  
 
    
 So, now that we've worked thorugh a toy model, let's get into the math:
