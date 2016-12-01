@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-	echo = FALSE,
+	echo = TRUE,
 	warning = FALSE,
 	comment = "##",
 	prompt = TRUE,
@@ -19,7 +19,10 @@ knitr::opts_chunk$set(
     
 # An introduction to PCA
 
-## Objective
+## Preliminaries
+- Install this packages in ***R***: {HSAUR} (the .rmd won't knit without this)
+
+## Objectives
 > In this module we will examine Principal Component Analysis, a method for analysing continuous multivariate datasets. We will learn what PCAs can be used for, will walk though a basic version by hand in R, and will finally run an analysis together using real world data. 
 Key concepts: 
 **Principle components**, 
@@ -28,6 +31,8 @@ Key concepts:
 **Loading**. 
 
 ## The basics  
+*This module can be found at: https://github.com/maydixon/PCA_module*
+   
 **Principal Component Analysis** or **PCA** is a common  statistical technique that helps to describe relationships in data without losing variation. PCA's are good tools for : 
 
 * Visualizing multivariate data
@@ -38,27 +43,29 @@ Key concepts:
 
 * Reducing highly dimensional data into fewer, more managable or visualizable dimensions
 
+* De-correlating variables
+
 * Often an intermediate step used to reveal associations between variables
-
-
- 
-      
+   
 ##### Conceptual underpinnings
 
 PCA can be thought of as creating natural axes that fit the data and describe it. 
 
 **[Drawing a toy version on the board]**
 
-How we normally plot data:
+How we normally plot our data, with our variables as axes (Fig 1A), and the same data rotated so that PC1 and PC2 are the axes (Fig 1B):
+
+<img src="img/reg.axis.png" width="420px"/>
+<img src="img/PCA.axis.png" width="420px"/>
+
+Neat animation showing how PC1 is fit, with the data projected onto possible eigenvectors. You can see that the best PC1 minimizes the distance between the points and the vector: 
+
  <img src="img/Q7HIP.gif" width="420px"/>
  
-* 2 or more variables, each forming an axis
 
-We have 2 or more variables- and each variable is an axis
-Each bullet point is a sample and its combination of the variables. 
+  
+This can extend to many dimensions. 
 
-PCA does, is it creates more informative axis through the data by finding the “principle components”—or the vectors through the data that describe the MOST variation, like least squares, except with more dimensions, potentially. This is easier to describe in 2 dimensions
-There are as many principle components as variables.
 
 ##Real world uses:
 Can measure a bunch of different ecological traits in closely related species, and see whether any can be reliably used to distinguish between the species:  
@@ -353,17 +360,104 @@ The second plot is mainly eyecandy, it is just a number line because we want to 
 
 Now this was quite a hustle, and included a lot of steps. Luckily R has build-in functions for these kind of analysis:
 
+Here is an example of a dataset in the HSAUR package in R (Handbook of Statistical Analysese Using R) of athletes from different countries that compete in a heptathlon. In this dataset we can see here that there are seven different events that each athlete is ranked on. 
+
+
+```{r}
+# If you haven't already, install this package:
+#install.packages("HSAUR")#need to install this package
+library(HSAUR) 
+head(heptathlon, n=10L)
+```
+
+When doing multivariate analyses, we want to know whether any of our variables behave in similar ways. From this we can figure out what processes govern the distribution of these samples. 
+
+For this example, we want to know whether being good in any one event is a predictor for how you will do in the other events. With this data, we can first look at pairwaise scatter plot to get an overall idea of how the variables are correlated with one another. 
+
+```{r}
+hep<-heptathlon[,-8] #remove the scores from the dataset in column 8
+pairs(hep)
+```
+
+We can see that most of these variable are highly correlated to one another and thats when we want to do PCA to try and reduce the dimensionality. Before we can run the PCA, we must choose whether we want to use the correlation matrix or the covariance matrix. The covariance matrix centers each variable on the mean but the scale of the variable still matters. Variables that originally had really high varaiance will control the resulting PCA plot much more strongly. Variables that had tiny variance will be unimportant. *Should only use the covariance matrix when all of the variables are in comparable units and the differences between their original variances are meaningful for interpretation. The correlation matrix uses the correlation coefficents. This adjusts each variable so it is centered around the mean and standardized to a variance of 1. 
+
+In this example, we can see that some of the events, such as high jump, have average value of 1.8, whereas the 800m run has an average of 120. Because of this, it makes sense to use the correlation matrix. This is the more common assocation matrix for PCA and differentiating between the two can be important for interpretation (we can run both in this example to show the difference).
 
 
 
+SO, let's run the PCA:
+
+In the base package in R
+There are two base functions in R for running a PCA: 
+there is prcomp() and princomp() that more or less give you the same thing
+
+Here is an example with prcomp:
+```{r, echo=TRUE}
+PC.hep.cor<-prcomp(hep, scale=TRUE) #using the correlation matrix
+print(PC.hep.cor)
+#scale=TRUE bases the PCA on the corrlation matrix
+
+PC.hep.cov<-prcomp(hep, scale=FALSE) #using the covariance matrix
+print(PC.hep.cov)
+#scale=FALSE bases the PCA on the covariance matrix
+```
+
+There can be as many principle components as there are variables, but the goal of this technique is to simplify! To figure out how many principal components to include in your analysis, a common technique is to use a scree plot. This show the proportion of variance explained by each component. There are several rules-of-thumb for figuring out how many components to include. Can either have some threshold of components required to explain a majority of the variance (typically ~80%) OR ignore any component that explains less than 1% of the variance. Most people just use the first two or three.
+
+```{r, echo=TRUE}
+plot(PC.hep.cor)
+summary(PC.hep.cor) #proportion of variance is the eigenvalue for each PC. We can see that 95% of our data is explained with the first four, but 81% is explained.
+```
+
+
+So, if we continue with the first two principal components, we can look how the data fall out. The black lines are each individual athlete and the red lines tell us which variable, or sporting event, is aligning on each component.
+```{r, echo=TRUE}
+biplot(PC.hep.cor)
+```
+
+We can also look at the biplot for the covariance matrix to compare.
+```{r}
+biplot(PC.hep.cov)
+```
+
+
+Loadings are the correlations between the original variales and the axis. They indicate the direction and magnitude of the icnrease in that variable.The higher the component loading, the more important that variable is to the component. 
+```{r, echo=TRUE}
+#here is the same example wtih princomp
+pc.hep.cor<-princomp(hep, scores=TRUE, cor=TRUE)
+#first argument is the dataset, second argument scores=TRUE which means that it will take the data and transform it into the reduced space; the third variable specifies to use the correlation matrix and not the covariance matrix to do this (same as scale=TRUE in the other function.)
+
+summary(pc.hep.cor)
+summary(PC.hep.cor)
+#you can see that the outputs for these are almost idential. i.e. it doesnt matter which function in the base R package you use.
+
+pc.hep.cor$loadings
+```
+
+Here is another example using the base package in R:   
+```{r, echo=TRUE}
+pottery
+pairs(pottery)
+pot.pc<-princomp(pottery, scores=TRUE, cor=TRUE)
+
+pot.pc$loadings
+pot.pc$scores
+
+plot(pot.pc)
+biplot(pot.pc)
+
+```
 
 
 
-      Helpful resources:
+      Some further helpful resources:
       3D visualization tool:
       http://setosa.io/ev/principal-component-analysis/
+      http://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues
+      
       Image credits: 
       http://www.sthda.com/english/wiki/principal-component-analysis-the-basics-you-should-read-r-software-and-data-mining
       Kirkpatrick, Mike. Population Genetics Lecture QT#2
+      stackoverflow user "amoeba": http://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues
     
     
