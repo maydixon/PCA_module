@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
     
-# An introduction to PCA
+
 
 ## Preliminaries
 - Install this packages in ***R***: {HSAUR} (the .rmd won't knit without this)
@@ -363,7 +363,7 @@ Now this was quite a hustle, and included a lot of steps. Luckily R has build-in
 Here is an example of a dataset in the HSAUR package in R (Handbook of Statistical Analysese Using R) of athletes from different countries that compete in a heptathlon. In this dataset we can see here that there are seven different events that each athlete is ranked on. 
 
 
-```{r}
+```{r, echo=FALSE}
 # If you haven't already, install this package:
 #install.packages("HSAUR")#need to install this package
 library(HSAUR) 
@@ -392,7 +392,7 @@ There are two base functions in R for running a PCA:
 there is prcomp() and princomp() that more or less give you the same thing
 
 Here is an example with prcomp:
-```{r, echo=TRUE}
+```{r}
 PC.hep.cor<-prcomp(hep, scale=TRUE) #using the correlation matrix
 print(PC.hep.cor)
 #scale=TRUE bases the PCA on the corrlation matrix
@@ -404,14 +404,14 @@ print(PC.hep.cov)
 
 There can be as many principle components as there are variables, but the goal of this technique is to simplify! To figure out how many principal components to include in your analysis, a common technique is to use a scree plot. This show the proportion of variance explained by each component. There are several rules-of-thumb for figuring out how many components to include. Can either have some threshold of components required to explain a majority of the variance (typically ~80%) OR ignore any component that explains less than 1% of the variance. Most people just use the first two or three.
 
-```{r, echo=TRUE}
+```{r}
 plot(PC.hep.cor)
 summary(PC.hep.cor) #proportion of variance is the eigenvalue for each PC. We can see that 95% of our data is explained with the first four, but 81% is explained.
 ```
 
 
 So, if we continue with the first two principal components, we can look how the data fall out. The black lines are each individual athlete and the red lines tell us which variable, or sporting event, is aligning on each component.
-```{r, echo=TRUE}
+```{r}
 biplot(PC.hep.cor)
 ```
 
